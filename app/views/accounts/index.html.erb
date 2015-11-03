@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Accounts</h1>
+<p><%= link_to 'Add Account', new_account_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Balance</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr class="accounts" data-link="<%= account_transactions_path(account) %>">
+        <td><%= account.name %> - <small><%= account.organisation %></small><p>Overdraft: £<%= account.overdraft %></p></td>
+        <td><%= account.balance %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>Net Worth</td>
+      <td><%= number_to_currency_gb(@net_worth) %></td>
+  </tbody>
+</table>
+
+<br>
+

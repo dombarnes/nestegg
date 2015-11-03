@@ -11,21 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103142213) do
+ActiveRecord::Schema.define(version: 20151103144556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.string   "name",            null: false
-    t.decimal  "opening_balance", null: false
-    t.decimal  "balance",         null: false
+    t.string   "name",                                    null: false
+    t.decimal  "opening_balance",                         null: false
+    t.decimal  "balance",         precision: 8, scale: 2, null: false
     t.decimal  "overdraft"
     t.string   "organisation"
     t.decimal  "credit_interest"
     t.decimal  "debit_interest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20151103142213) do
     t.integer  "category_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "account_id",  null: false
   end
 
 end

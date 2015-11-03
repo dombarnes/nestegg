@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @account.name %>
+</p>
+
+<p>
+  <strong>Opening balance:</strong>
+  <%= @account.opening_balance %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @account.balance %>
+</p>
+
+<p>
+  <strong>Overdraft:</strong>
+  <%= @account.overdraft %>
+</p>
+
+<p>
+  <strong>Organisation:</strong>
+  <%= @account.organisation %>
+</p>
+
+<p>
+  <strong>Credit interest:</strong>
+  <%= @account.credit_interest %>
+</p>
+
+<p>
+  <strong>Debit interest:</strong>
+  <%= @account.debit_interest %>
+</p>
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>

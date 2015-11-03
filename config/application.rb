@@ -11,6 +11,7 @@ Bundler.require(*Rails.groups)
 module Nestegg
   class Application < Rails::Application
     config.i18n.enforce_available_locales = true
+    config.i18n.default_locale = :'en-GB'
     config.generators do |generate|
       generate.helper false
       generate.javascript_engine false
