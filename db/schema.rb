@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103134800) do
+ActiveRecord::Schema.define(version: 20151103142213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "name",            null: false
+    t.decimal  "opening_balance", null: false
+    t.decimal  "balance",         null: false
+    t.decimal  "overdraft"
+    t.string   "organisation"
+    t.decimal  "credit_interest"
+    t.decimal  "debit_interest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.integer  "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -31,5 +50,14 @@ ActiveRecord::Schema.define(version: 20151103134800) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "transactions", force: :cascade do |t|
+    t.string   "description", null: false
+    t.decimal  "amount",      null: false
+    t.datetime "date",        null: false
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
 end
