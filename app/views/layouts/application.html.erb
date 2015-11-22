@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="ROBOTS" content="NOODP" />
   <meta name="viewport" content="initial-scale=1" />
+  <script type="text/javascript" href="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/jquery-ui.js">
   <%#
     Configure default and controller-, and view-specific titles in
     config/locales/en.yml. For more see:
@@ -17,9 +19,11 @@
   <header>
     <%= render "flashes" -%>
   </header>
-  <section>
+  <main class="main">
     <%= yield %>
-  </section>
+  </main>
+  <footer>
   <%= render 'layouts/footer' %>
+  <footer>
 </body>
 </html>

@@ -1,51 +1,53 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_account
 
-  # GET /transactions
   def index
-    @transactions = Transaction.all
-    @account = Account.find(params[:account_id])
+    @transactions = @account.transactions
+    # .paginate(page: params[:page])
   end
 
-  # GET /transactions/1
   def show
   end
 
-  # GET /transactions/new
   def new
-    @transaction = Transaction.new
+    @transaction = @account.transactions.new
   end
 
-  # GET /transactions/1/edit
   def edit
   end
 
-  # POST /transactions
   def create
-    @account = Account.find(current_account)
     @transaction = @account.transactions.new(transaction_params)
-
+    @account.balance += @transaction.amount
+    @transacaction.balance = @acount.balance
+      
     if @transaction.save
+      @account.save!
       redirect_to account_transactions_path(@account), notice: 'Transaction saved!'
     else
       render :new
     end
   end
 
-  # PATCH/PUT /transactions/1
   def update
     if @transaction.update(transaction_params)
-      redirect_to @transaction, notice: 'Transaction updated!'
+      redirect_to account_transactions_path(@account), notice: 'Transaction updated!'
     else
       render :edit
     end
   end
 
-  # DELETE /transactions/1
   def destroy
     @transaction.destroy
-    redirect_to transactions_url, notice: 'Transaction was successfully destroyed.'
+    redirect_to account_transactions_url, notice: 'Transaction was successfully destroyed.'
   end
+
+  def import
+    Transaction.import(params[:file])
+    redirect_to root_url, notice: "Transactions imported."
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -53,8 +55,12 @@ class TransactionsController < ApplicationController
       @transaction = Transaction.find(params[:id])
     end
 
+    def set_account
+      @account = Account.find(params[:account_id])
+    end
+
     # Only allow a trusted parameter "white list" through.
     def transaction_params
-      params.require(:transaction).permit(:description, :amount, :date, :category_id)
+      params.require(:transaction).permit(:description, :amount, :date, :category_id, :account_id)
     end
 end

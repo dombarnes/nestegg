@@ -1,13 +1,13 @@
 en-GB:
   titles:
-      application: "Nest Egg"
-      accounts: 
-        index: "My Accounts - Nest Egg"
-        edit: 'Edit %{account_name} - Nest Egg'
-        new: 'Add Account - Nest Egg'
-      transactions:
-        show: '%{account} - Nest Egg'
-        new: 'Add Transaction - Nest Egg'
+    application: "Nest Egg"
+    accounts: 
+      index: "My Accounts - Nest Egg"
+      edit: 'Edit %{account_name} - Nest Egg'
+      new: 'Add Account - Nest Egg'
+    transactions:
+      show: '%{account} - Nest Egg'
+      new: 'Add Transaction - Nest Egg'
   date:
     abbr_day_names:
     - Sun

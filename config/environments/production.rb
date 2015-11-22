@@ -1,6 +1,7 @@
 require Rails.root.join("config/smtp")
 Rails.application.configure do
   config.cache_classes = true
+  config.force_ssl = true
   config.eager_load = true
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true

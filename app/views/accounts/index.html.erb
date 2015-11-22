@@ -5,7 +5,7 @@
 
 <table>
   <thead>
-    <tr>
+    <tr class="table-row-heading">
       <th>Name</th>
       <th>Balance</th>
     </tr>
@@ -13,9 +13,9 @@
 
   <tbody>
     <% @accounts.each do |account| %>
-      <tr class="accounts" data-link="<%= account_transactions_path(account) %>">
-        <td><%= account.name %> - <small><%= account.organisation %></small><p>Overdraft: £<%= account.overdraft %></p></td>
-        <td><%= account.balance %></td>
+      <tr class="table-row" data-link="<%= account_transactions_path(account) %>">
+        <td class="table-cell"><%= account.name %> - <small><%= account.organisation %></small><p>Overdraft: £<%= account.overdraft %></p></td>
+        <td class="table-cell currency"><%= account.balance %></td>
       </tr>
     <% end %>
     <tr>

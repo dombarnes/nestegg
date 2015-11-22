@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :categories
   resources :accounts do  
-  	resources :transactions 
+  	resources :transactions do
+  		collection { post :import }
+  	end
   end
+  resources :categories
 
   root 'accounts#index'
 end
