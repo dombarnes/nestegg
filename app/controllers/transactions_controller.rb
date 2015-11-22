@@ -44,7 +44,7 @@ class TransactionsController < ApplicationController
   end
 
   def import
-    Transaction.import(params[:file])
+    @account.transaction.import(params[:file])
     redirect_to root_url, notice: "Transactions imported."
   end
 

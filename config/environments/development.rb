@@ -4,7 +4,9 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :test
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
   config.active_support.deprecation = :log
   config.active_record.migration_error = :page_load
   config.assets.debug = true

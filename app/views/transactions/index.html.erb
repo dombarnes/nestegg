@@ -34,8 +34,10 @@
   </tbody>
 </table>
 
+
 <h2>Import from CSV</h2>
-<%= form_tag import_transactions_path, multipart: true %>
+
+<%= form_tag import_account_transactions_path, multipart: true do %> 
   <%= file_field_tag :file %>
   <%= submit_tag "Import" %>
 <% end %>
