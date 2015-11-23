@@ -19,4 +19,11 @@ production: &deploy
   timeout: 5000
   url:  <%= ENV.fetch("DATABASE_URL", "") %>
 
-staging: *deploy
+staging: &deploy
+  <<: *default
+  database: nestegg_staging
+  encoding: utf8
+  min_messages: warning
+  pool: <%= [ENV.fetch("MAX_THREADS", 5), ENV.fetch("DB_POOL", 5)].max %>
+  timeout: 5000
+  url:  <%= ENV.fetch("DATABASE_URL", "") %>
