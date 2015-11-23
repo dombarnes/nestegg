@@ -10,7 +10,7 @@ class Transaction < ActiveRecord::Base
 	default_scope { order('date DESC') }
 
 	def self.import(file)
-		CSV.foreach(file.path, headers: true, converters: :numeric) do |row|
+		Ccsv.foreach(file.path, headers: true, converters: :numeric) do |row|
 			row['date'] = row['date'].to_date
 			row['amount'] = row['amount'].to_f
 			Transaction.create! row.to_hash

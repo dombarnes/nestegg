@@ -33,7 +33,7 @@ gem "will_paginate"
 gem "bootstrap-will_paginate"
 
 # For importing
-gem "csv"
+gem "ccsv", '~> 1.1.0'
 
 group :development do
   gem "spring"
