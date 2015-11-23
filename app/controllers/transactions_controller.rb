@@ -44,8 +44,8 @@ class TransactionsController < ApplicationController
   end
 
   def import
-    @account.transaction.import(params[:file])
-    redirect_to root_url, notice: "Transactions imported."
+    @account.transaction.delay.import(params[:file])
+    redirect_to root_url, notice: 'Transactions imported.'
   end
 
 
