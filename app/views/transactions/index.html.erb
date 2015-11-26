@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <%= link_to "Back to accounts", accounts_path %>
-<h1>Listing Transactions</h1>
+<h1><%= @account.name.capitalize %> Transactions</h1>
 <h2>Balance</h2>£<%= @account.balance %>
 <p><%= link_to 'New Transaction', new_account_transaction_path %>
 <table>
@@ -36,8 +36,9 @@
 
 
 <h2>Import from CSV</h2>
-
+<p>Import transactions from your bank's download facilities.
 <%= form_tag import_account_transactions_path, multipart: true do %> 
+  <%= check_box_tag headers %><%= label_tag "This file has header rows" %>
   <%= file_field_tag :file %>
   <%= submit_tag "Import" %>
 <% end %>
