@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
-<%= link_to "Back to accounts", accounts_path %>
 <h1><%= @account.name.capitalize %> Transactions</h1>
+
+<%= link_to 'Back to accounts', accounts_path %>
 <h2>Balance</h2>£<%= @account.balance %>
 <p><%= link_to 'New Transaction', new_account_transaction_path %>
 <table>

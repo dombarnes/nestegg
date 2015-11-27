@@ -26,6 +26,18 @@ if ! grep --quiet --no-messages --fixed-strings 'port' .foreman; then
   printf 'port: 3000\n' >> .foreman
 fi
 
+# Mailcatcher needed for local email testing
+if ! command -v mailcatcher > /dev/null; then
+  gem install mailcatcher
+  mailcatcher
+fi
+
+# Redis needed for Resque
+if ! command redis-server ping > /dev/null; then
+  brew install redis
+fi
+
+
 if ! command -v foreman > /dev/null; then
   printf 'Foreman is not installed.\n'
   printf 'See https://github.com/ddollar/foreman for install instructions.\n'
