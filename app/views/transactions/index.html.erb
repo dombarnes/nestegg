@@ -27,7 +27,7 @@
           <td><%= transaction.category_id %></td>
           <td><%= link_to 'Show', [@account, transaction] %></td>
           <td><%= link_to 'Edit', edit_account_transaction_path(@account, transaction) %></td>
-          <td><%= link_to 'Destroy', [@account, transaction], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Delete', [@account, transaction], method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     <% end %>

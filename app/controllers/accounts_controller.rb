@@ -22,7 +22,7 @@ class AccountsController < ApplicationController
     @account.balance = @account.opening_balance
     if @account.save
       AccountMailer.new_account(@account).deliver_later
-      redirect_to @account, notice: 'Account was successfully created.'
+      redirect_to @account, notice: 'Your new account was created. You can now add or import your transactions.'
     else
       render :new
     end
@@ -37,8 +37,9 @@ class AccountsController < ApplicationController
   end
 
   def destroy
-    @account.destroy
-    redirect_to accounts_url, notice: 'Account was successfully destroyed.'
+    DeleteAccountJob.perform_later @account
+    redirect_to accounts_url, notice: 'Account was deleted.'
+
   end
 
   private
