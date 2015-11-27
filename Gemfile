@@ -6,6 +6,8 @@ gem "rails", "~> 4.2.0"
 gem "pg"
 gem "puma", '~> 2.15'
 gem "delayed_job_active_record"
+gem "resque"
+gem "resque-scheduler"
 
 gem "airbrake"
 gem "autoprefixer-rails"
