@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
   
-    def index
+  def index
     @accounts = Account.all
     @net_worth = Account.sum(:balance)
   end
@@ -14,15 +14,19 @@ class AccountsController < ApplicationController
   end
 
   def edit
-      @account_name = @account.name
+    @account_name = @account.name
   end
 
   def create
     @account = Account.new(account_params)
     @account.balance = @account.opening_balance
+    
     if @account.save
+      @account.transactions.create(amount: @account.opening_balance, 
+                                           date: Time.now, 
+                                    description: "Opening Balance")
       AccountMailer.new_account(@account).deliver_later
-      redirect_to @account, notice: 'Your new account was created. You can now add or import your transactions.'
+      redirect_to account_transactions_path(@account), notice: 'Your new account was created. You can now add or import your transactions.'
     else
       render :new
     end
@@ -37,9 +41,8 @@ class AccountsController < ApplicationController
   end
 
   def destroy
-    DeleteAccountJob.perform_later @account
+    DeleteAccountJob.perform_now @account
     redirect_to accounts_url, notice: 'Account was deleted.'
-
   end
 
   private

@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 
-ruby "2.2.3"
+ruby "2.3.0"
 
 gem "rails", "~> 4.2.0"
 gem "pg"
-gem "puma", '~> 2.15'
+gem "puma", "~> 2.15"
 gem "delayed_job_active_record"
 gem "resque"
 gem "resque-scheduler"
@@ -42,10 +42,10 @@ group :development do
   gem "spring-commands-rspec"
   gem "web-console"
   gem "mail"
-  gem 'capistrano', '~> 3.2.1'
-  gem 'capistrano-rails', '~> 1.1.1'
-  gem 'capistrano-bundler', '~> 1.1.2'
-  gem 'capistrano-rbenv', '~> 2.0.2'
+  gem "capistrano", '~> 3.2.1'
+  gem "capistrano-rails", '~> 1.1.1'
+  gem "capistrano-bundler", '~> 1.1.2'
+  gem "capistrano-rbenv", '~> 2.0.2'
 end
 
 group :development, :test do

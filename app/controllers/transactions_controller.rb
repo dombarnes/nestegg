@@ -48,7 +48,6 @@ class TransactionsController < ApplicationController
     redirect_to account_transactions_url, notice: 'Transactions imported.'
   end
 
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction

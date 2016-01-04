@@ -5,7 +5,7 @@ namespace :resque do
 	task :setup do
   	require 'resque'	
   	ENV['QUEUE'] ||= '*'
-
+  	
 	  Resque.redis = 'localhost:6379' unless Rails.env == 'production'
 
 	  #for redistogo on heroku http://stackoverflow.com/questions/2611747/rails-resque-workers-fail-with-pgerror-server-closed-the-connection-unexpectedl
@@ -15,8 +15,8 @@ namespace :resque do
 	  Resque.after_fork = Proc.new do |job|
 	    ActiveRecord::Base.establish_connection
 	  end
+	end
 end
-
 
 desc "Alias for resque:work (To run workers on Heroku)"
 task "jobs:work" => "resque:work"

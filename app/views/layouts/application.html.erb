@@ -16,9 +16,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= body_class %>">
-  <header>
-    <%= render "flashes" -%>
-  </header>
+  <%= render 'layouts/header' %>
+  <%= render "flashes" -%>
   <main class="main">
     <%= yield %>
   </main>
