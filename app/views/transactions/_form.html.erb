@@ -5,7 +5,7 @@
     <%= f.input :description %>
     <%= f.input :amount %>
     <%= f.text_field 'date', class: :datepicker %>
-    <%= f.input :category_id %>
+    <%= f.collection_select(:category_id, Category.all, :id, :name)%>
   </div>
 
   <div class="form-actions">

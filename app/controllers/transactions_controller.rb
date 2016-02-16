@@ -3,8 +3,7 @@ class TransactionsController < ApplicationController
   before_action :set_account
 
   def index
-    @transactions = @account.transactions
-    # .paginate(page: params[:page])
+    @transactions = @account.transactions.paginate(:page => params[:page])
   end
 
   def show
@@ -19,11 +18,12 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = @account.transactions.new(transaction_params)
-    @account.balance += @transaction.amount
-    @transacaction.balance = @acount.balance
+    
+    @transaction.balance += @transaction.amount
       
     if @transaction.save
       @account.save!
+      @account.balance = @transaction.balance
       redirect_to account_transactions_path(@account), notice: 'Transaction saved!'
     else
       render :new
@@ -40,7 +40,7 @@ class TransactionsController < ApplicationController
 
   def destroy
     @transaction.destroy
-    redirect_to account_transactions_url, notice: 'Transaction was successfully destroyed.'
+    redirect_to account_transactions_url, notice: 'Transaction was successfully deleted.'
   end
 
   def import

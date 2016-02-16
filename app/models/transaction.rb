@@ -14,8 +14,7 @@ class Transaction < ActiveRecord::Base
 	def self.import(file, headers)
 		Ccsv.foreach(file.path) do |row|
 			next if headers == true
-			# Transaction.create! Hash[row]
-			p row
+			Transaction.create(Hash[row])
 		end
 	end
 

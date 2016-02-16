@@ -19,12 +19,12 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(account_params)
-    @account.balance = @account.opening_balance
+    @account.balance = @account.opening_balance #replace this with a balance calculation after save
     
     if @account.save
-      @account.transactions.create(amount: @account.opening_balance, 
-                                           date: Time.now, 
-                                    description: "Opening Balance")
+      # Create the opening balance transaction
+      @account.transactions.create(amount: @account.opening_balance, date: Time.now, description: "Opening Balance")
+      # calculcate_balance 
       AccountMailer.new_account(@account).deliver_later
       redirect_to account_transactions_path(@account), notice: 'Your new account was created. You can now add or import your transactions.'
     else
