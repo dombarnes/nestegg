@@ -25,7 +25,7 @@ class AccountsController < ApplicationController
       # Create the opening balance transaction
       @account.transactions.create(amount: @account.opening_balance, date: Time.now, description: "Opening Balance")
       # calculcate_balance 
-      AccountMailer.new_account(@account).deliver_later
+      AccountMailer.new_account(@account).deliver_now
       redirect_to account_transactions_path(@account), notice: 'Your new account was created. You can now add or import your transactions.'
     else
       render :new
