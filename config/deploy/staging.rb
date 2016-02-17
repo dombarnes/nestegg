@@ -4,10 +4,8 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{deploy@example.com}
-role :web, %w{deploy@example.com}
-role :db,  %w{deploy@example.com}
-
+role :web, ""
+# role :app, %w{deploy@example.com}
 
 # Extended Server Syntax
 # ======================
@@ -15,8 +13,18 @@ role :db,  %w{deploy@example.com}
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
+server '', roles: %w{web app}
 
+set :rails_env, "production"
+set :deploy_via, :remote_cache
+set :branch, "develop"
+
+# set :base_port, 6500
+# set :buildpack_url, "https://github.com/heroku/heroku-buildpack-ruby"
+# set :buildpack_hash, Digest::SHA1.hexdigest(fetch(:buildpack_url))
+# set :buildpack_path, "#{shared_path}/buildpack-#{fetch(:buildpack_hash)}"
+# set :concurrency, "web=1"
+# set :launchd_conf_path, "/Users/#{fetch(:user)}/Library/LaunchAgents"
 
 # Custom SSH Options
 # ==================
@@ -25,11 +33,15 @@ server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
 #
 # Global options
 # --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
+ set :ssh_options, {
+   user: "",
+   port: 3322,
+   auth_methods: %w(publickey),
+   keys: %w(/Users//.ssh/id_dsa),
+   forward_agent: true
+   # verbose: :debug
+ }
+ 
 #
 # And/or per server (overrides global)
 # ------------------------------------

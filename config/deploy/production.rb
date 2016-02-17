@@ -4,8 +4,6 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :web, "wiki.trilby.co.uk"
-# role :db, "wiki.trilby.co.uk:3322", :primary => true
 # role :app, %w{deploy@example.com}
 # role :web, %w{deploy@example.com}
 # role :db,  %w{deploy@example.com}
@@ -17,7 +15,7 @@ role :web, "wiki.trilby.co.uk"
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'wiki.trilby.co.uk', roles: %w{web app}
+server '', roles: %w{web app}
 
 set :rails_env, "production"
 set :deploy_via, :remote_cache
@@ -38,10 +36,10 @@ set :branch, "master"
 # Global options
 # --------------
  set :ssh_options, {
-   user: "serveradmin",
-   port: 3322,
+   user: "",
+   port: ,
    auth_methods: %w(publickey),
-   keys: %w(/Users/domster83/.ssh/id_dsa),
+   keys: %w(/Users//.ssh/id_dsa),
    forward_agent: true
    # verbose: :debug
  }

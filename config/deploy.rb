@@ -8,7 +8,7 @@ set :repo_url, 'git@github.com:dombarnes/nestegg.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/Users/serveradmin/apps/nestegg'
+set :deploy_to, '/Users//apps/nestegg'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -17,7 +17,7 @@ set :deploy_to, '/Users/serveradmin/apps/nestegg'
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :debug
+set :log_level, :info
 
 # Default value for :pty is false
 # set :pty, true
@@ -32,13 +32,13 @@ set :deploy_to, '/Users/serveradmin/apps/nestegg'
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5
 
 
 set :deploy_env, {
-  'DATABASE_URL' => 'postgres://serveradmin@localhost/nestegg',
+  'DATABASE_URL' => '',
   'LANG' => 'en_GB.UTF-8',
-  'PATH' => '~/.rbenv/shims/:bin:vendor/bundle/ruby/1.9.1/bin:/usr/local/bin:/usr/bin:/bin',
+  'PATH' => 'bin:vendor/bundle/ruby/1.9.1/bin:/usr/local/bin:/usr/bin:/bin',
   'GEM_PATH' => 'vendor/bundle/ruby/1.9.1',
   'RACK_ENV' => 'production',
   
