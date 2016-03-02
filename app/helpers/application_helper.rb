@@ -1,6 +1,5 @@
 module ApplicationHelper
-
   def recalculate_totals(account)
-    # TODO
+    # TODO: Recalculate account totals
   end
 end

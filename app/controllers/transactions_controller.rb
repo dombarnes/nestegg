@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
   before_action :set_account
 
   def index
-    @transactions = @account.transactions.paginate(:page => params[:page])
+    @transactions = @account.transactions.paginate(page: params[:page])
   end
 
   def show
@@ -18,9 +18,9 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = @account.transactions.new(transaction_params)
-    
+
     @transaction.balance += @transaction.amount
-      
+
     if @transaction.save
       @account.save!
       @account.balance = @transaction.balance
@@ -49,17 +49,18 @@ class TransactionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
-    def set_account
-      @account = Account.find(params[:account_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def transaction_params
-      params.require(:transaction).permit(:description, :amount, :date, :category_id, :account_id)
-    end
+  def set_account
+    @account = Account.find(params[:account_id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def transaction_params
+    params.require(:transaction).permit(:description, :amount, :date, :category_id, :account_id)
+  end
 end

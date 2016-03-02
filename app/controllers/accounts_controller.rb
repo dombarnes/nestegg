@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  
+
   def index
     @accounts = Account.all
     @net_worth = Account.sum(:balance)
@@ -19,12 +19,11 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.new(account_params)
-    @account.balance = @account.opening_balance #replace this with a balance calculation after save
-    
+    @account.balance = @account.opening_balance # replace this with a balance calculation after save
     if @account.save
       # Create the opening balance transaction
-      @account.transactions.create(amount: @account.opening_balance, date: Time.now, description: "Opening Balance")
-      # calculcate_balance 
+      @account.transactions.create(amount: @account.opening_balance, date: Time.now, description: 'Opening Balance')
+      # calculcate_balance
       AccountMailer.new_account(@account).deliver_now
       redirect_to account_transactions_path(@account), notice: 'Your new account was created. You can now add or import your transactions.'
     else
@@ -46,13 +45,14 @@ class AccountsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_account
-      @account = Account.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def account_params
-      params.require(:account).permit(:name, :opening_balance, :balance, :overdraft, :organisation, :credit_interest, :debit_interest)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_account
+    @account = Account.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def account_params
+    params.require(:account).permit(:name, :opening_balance, :balance, :overdraft, :organisation, :credit_interest, :debit_interest)
+  end
 end
