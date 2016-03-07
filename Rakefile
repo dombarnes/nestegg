@@ -18,5 +18,4 @@ if defined? RSpec
   end
 end
 
-task default: "bundler:audit"
-
+task default: 'bundler:audit'

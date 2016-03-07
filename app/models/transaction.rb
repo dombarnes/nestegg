@@ -17,5 +17,4 @@ class Transaction < ActiveRecord::Base
       Transaction.create(Hash[row])
     end
   end
-  
 end
