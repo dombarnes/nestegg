@@ -10,16 +10,21 @@ class Transaction < ActiveRecord::Base
   default_scope { order('date DESC') }
   scope :last_30_days, -> { where date: Time.now..30.days.ago }
   scope :last_3_months, -> { where date: Time.now..3.months.ago }
-
-  FILTER = [ "All", "Last 30 days", "Last month", "Last 3 months" ]
+  scope :last_month, -> { where date: Time.now.last_month.beginning_of_month..Time.now.last_month.end_of_month}
+  scope :last_quarter, -> { where date: Time.now.beginning_of_month..Time.now.end_of_month}
+  FILTER = {
+        "All" => "all",
+        "Last 30 days" => "last_30_days",
+        "Last Month" => "last_month",
+        "Last quarter" => "last_quarter"
+      }
 
   attr_accessor :file
 
-  def self.import(file, headers)
-    Ccsv.foreach(file.path) do |row|
-      next if headers == true
-      category = Category.find_or_create!(name: Hash[row][category])
-      Transaction.create(Hash[row])
+  def self.import(file)
+    SmarterCSV.process(file, chunk_size: 100, key_mapping: {date: date, description: description, amount: amount } ) do |row|
+      put row
+      Transaction.create(row)
     end
   end
 end

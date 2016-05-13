@@ -3,8 +3,7 @@
   <%= link_to 'Edit', edit_account_path(@account) %> <%= link_to 'Back to accounts', accounts_path %>
   <h2>Balance <%= @account.balance %></h2>
   <p><%= link_to 'New Transaction', new_account_transaction_path(@account) %></p>
-
-  <p id="notice"><%= notice %></p>
+  <p><%= link_to 'Import from CSV', import_account_transactions_path(@account), class: 'btn' %>
 
 <p>
   <strong>Opening balance:</strong>
@@ -28,6 +27,5 @@
 
 <%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back', accounts_path %> | 
-<%= link_to 'Delete Account', @account, method: :delete, data: { confirm: 'Are you sure? All transactions will also be deleted.' } %>
 
 <%= render 'transactions' %>

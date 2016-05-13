@@ -43,11 +43,6 @@ class TransactionsController < ApplicationController
     redirect_to account_transactions_url, notice: 'Transaction was successfully deleted.'
   end
 
-  def import
-    @account.transactions.import(params[:file], :headers)
-    redirect_to account_transactions_url, notice: 'Transactions imported.'
-  end
-
   private
 
   def set_transaction

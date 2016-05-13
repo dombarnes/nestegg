@@ -83,7 +83,6 @@ GEM
     capybara-webkit (1.11.1)
       capybara (>= 2.3.0, < 2.8.0)
       json
-    ccsv (1.1.0)
     coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -285,6 +284,7 @@ GEM
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
     slop (3.6.0)
+    smarter_csv (1.1.0)
     spring (1.7.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -346,7 +346,6 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv (~> 2.0)
   capybara-webkit (>= 1.2.0)
-  ccsv (~> 1.1.0)
   coffee-rails (~> 4.1.0)
   database_cleaner
   dotenv-rails
@@ -381,6 +380,7 @@ DEPENDENCIES
   shoulda-matchers
   simple_form
   simplecov
+  smarter_csv (~> 1.1.0)
   spring
   spring-commands-rspec
   timecop
