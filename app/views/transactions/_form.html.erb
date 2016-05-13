@@ -1,7 +1,8 @@
-<%= simple_form_for [@account, @transaction] do |f| %>
+<%= simple_form_for @transaction do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.hidden_field :account_id, value: '1' %>
     <%= f.input :description %>
     <%= f.input :amount %>
     <%= f.text_field 'date', class: :datepicker %>

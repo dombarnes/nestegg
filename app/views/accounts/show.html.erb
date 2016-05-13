@@ -30,4 +30,4 @@
 <%= link_to 'Back', accounts_path %> | 
 <%= link_to 'Delete Account', @account, method: :delete, data: { confirm: 'Are you sure? All transactions will also be deleted.' } %>
 
-<% render @account.transactions %>
+<%= render 'transactions' %>

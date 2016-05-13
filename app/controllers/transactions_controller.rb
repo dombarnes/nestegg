@@ -2,10 +2,11 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   def index
-    @transactions = Transaction.joins(:account).paginate(page: params[:page])
+    @transactions = Transaction.send(params[:timeframe] || 'all').joins(:account).paginate(page: params[:page])
   end
 
   def show
+    @account = @transaction.account
   end
 
   def new
