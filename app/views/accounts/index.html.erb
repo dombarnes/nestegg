@@ -13,7 +13,7 @@
 
   <tbody>
     <% @accounts.each do |account| %>
-      <tr class="table-row" data-link="<%= account_transactions_path(account) %>">
+      <tr class="table-row" data-link="<%= account_path(account) %>">
         <td class="table-cell"><%= account.name %> - <small><%= account.organisation %></small><p>Overdraft: £<%= account.overdraft %></p></td>
         <td class="table-cell currency"><%= account.balance %></td>
       </tr>

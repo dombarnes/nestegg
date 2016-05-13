@@ -1,9 +1,10 @@
-<p id="notice"><%= notice %></p>
+<section>
+  <h1><%= @account.name.capitalize %> Transactions</h1> (<%= @account.organisation %>)
+  <%= link_to 'Edit', edit_account_path(@account) %> <%= link_to 'Back to accounts', accounts_path %>
+  <h2>Balance <%= @account.balance %></h2>
+  <p><%= link_to 'New Transaction', new_account_transaction_path(@account) %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @account.name %>
-</p>
+  <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Opening balance:</strong>
@@ -11,18 +12,8 @@
 </p>
 
 <p>
-  <strong>Balance:</strong>
-  <%= @account.balance %>
-</p>
-
-<p>
   <strong>Overdraft:</strong>
   <%= @account.overdraft %>
-</p>
-
-<p>
-  <strong>Organisation:</strong>
-  <%= @account.organisation %>
 </p>
 
 <p>
@@ -38,3 +29,5 @@
 <%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back', accounts_path %> | 
 <%= link_to 'Delete Account', @account, method: :delete, data: { confirm: 'Are you sure? All transactions will also be deleted.' } %>
+
+<% render @account.transactions %>

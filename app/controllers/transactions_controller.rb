@@ -1,16 +1,15 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-  before_action :set_account
 
   def index
-    @transactions = @account.transactions.paginate(page: params[:page])
+    @transactions = Transaction.joins(:account).paginate(page: params[:page])
   end
 
   def show
   end
 
   def new
-    @transaction = @account.transactions.new
+    @transaction = Transaction.new
   end
 
   def edit
@@ -50,7 +49,6 @@ class TransactionsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_transaction
     @transaction = Transaction.find(params[:id])
   end
@@ -59,7 +57,6 @@ class TransactionsController < ApplicationController
     @account = Account.find(params[:account_id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def transaction_params
     params.require(:transaction).permit(:description, :amount, :date, :category_id, :account_id)
   end
