@@ -1,6 +1,5 @@
 require File.expand_path('../boot', __FILE__)
 require "rails/all"
-require "ccsv"
 
 Bundler.require(*Rails.groups)
 module Nestegg

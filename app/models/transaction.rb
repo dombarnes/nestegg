@@ -1,4 +1,5 @@
 class Transaction < ActiveRecord::Base
+
   belongs_to :account
   has_many :categories
 
@@ -12,6 +13,7 @@ class Transaction < ActiveRecord::Base
   scope :last_3_months, -> { where date: Time.now..3.months.ago }
   scope :last_month, -> { where date: Time.now.last_month.beginning_of_month..Time.now.last_month.end_of_month}
   scope :last_quarter, -> { where date: Time.now.beginning_of_month..Time.now.end_of_month}
+
   FILTER = {
         "All" => "all",
         "Last 30 days" => "last_30_days",
@@ -21,10 +23,4 @@ class Transaction < ActiveRecord::Base
 
   attr_accessor :file
 
-  def self.import(file)
-    SmarterCSV.process(file, chunk_size: 100, key_mapping: {date: date, description: description, amount: amount } ) do |row|
-      put row
-      Transaction.create(row)
-    end
-  end
 end

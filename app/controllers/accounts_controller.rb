@@ -7,6 +7,7 @@ class AccountsController < ApplicationController
   end
 
   def show
+    @transactions = @account.transactions.paginate(page: params[:page])
   end
 
   def new
@@ -30,7 +31,7 @@ class AccountsController < ApplicationController
       render :new
     end
   end
-
+  
   def update
     if @account.update(account_params)
       redirect_to @account, notice: 'Account was successfully updated.'

@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
   end
 
   def show
-    @account = @transaction.account
+    @account = @transaction.account    
   end
 
   def new
@@ -18,9 +18,7 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = @account.transactions.new(transaction_params)
-
     @transaction.balance += @transaction.amount
-
     if @transaction.save
       @account.save!
       @account.balance = @transaction.balance
@@ -40,7 +38,7 @@ class TransactionsController < ApplicationController
 
   def destroy
     @transaction.destroy
-    redirect_to account_transactions_url, notice: 'Transaction was successfully deleted.'
+    redirect_to account_url, notice: 'Transaction was successfully deleted.'
   end
 
   private
