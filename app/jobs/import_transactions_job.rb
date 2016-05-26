@@ -26,9 +26,9 @@ class ImportTransactionsJob < ActiveJob::Base
         t.save!
       end
     end
-    Rails.logger.debug "*** Import complete. Deleting temp file ***"
+    Rails.logger.debug '*** Import complete. Deleting temp file ***'
     File.delete(file)
-    Rails.logger.debug "*** Temp file deleted ***"
+    Rails.logger.debug '*** Temp file deleted ***'
     Rails.logger.debug @error_rows
   end
 

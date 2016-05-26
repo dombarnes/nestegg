@@ -3,9 +3,14 @@
 # be available to Rake.
 
 require File.expand_path('../config/application', __FILE__)
-require 'rubocop/rake_task'
 
-RuboCop::RakeTask.new
+if %w(development test).include? Rails.env
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
+
+  task(:default).clear
+  task default: [:rubocop, :spec]
+end
 
 Rails.application.load_tasks
 task(:default).clear
