@@ -51,6 +51,7 @@ en:
     form:
       forgot_password: Forgot password?
       sign_up: Sign up
+      sign_in: Sign In
     new:
       title: Sign in
   users:
