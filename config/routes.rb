@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   end
   resources :transactions
   resources :categories
-
+  
   root 'accounts#index'
 end

@@ -2,6 +2,7 @@
   <div class="centered-navigation-wrapper">
     <nav role="navigation">
       <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
+      <% if signed_in? %>
         <li class="nav-link"><%= link_to 'Accounts', accounts_path %></li>
         <li class="nav-link"><%= link_to 'Transactions', transactions_path %></li>
         <li class="nav-link more"><a href="javascript:void(0)">More</a>
@@ -10,15 +11,21 @@
             <li class="more"><a href="javascript:void(0)">Settings</a>
               <ul class="submenu">
                 <li><%= link_to 'Profile', root_path %></li>
-                <li><%= link_to 'Change Password', root_path %></li>
+                <li><%= link_to 'Change Password', edit_user_password_path(current_user) %></li>
               </ul>
             </li>
-            <li><%= link_to 'Log Off', root_path %></li>
           </ul>
         </li>
+        <li class="nav-link">
+            Signed in as: <%= current_user.email %>
+            <%= link_to 'Sign out', sign_out_path, method: :delete %>
+        </li>
+        <% else %>
+          <li class="nav-link"><%= link_to 'Sign in', sign_in_path %></li>
+        <% end %>
         <li class="nav-link"><a href="javascript:void(0)">About Us</a></li>
         <li class="nav-link"><a href="javascript:void(0)">Contact</a></li>
-        <li class="nav-link"><a href="javascript:void(0)">Sign up</a></li>
+        
       </ul>
     </nav>
   </div>

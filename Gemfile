@@ -7,6 +7,7 @@ gem "puma", "~> 3.0"
 
 gem "autoprefixer-rails"
 gem "bourbon"
+gem "clearance"
 gem 'coffee-rails', '~> 4.1.0'
 # gem "delayed_job_active_record"
 gem "email_validator"

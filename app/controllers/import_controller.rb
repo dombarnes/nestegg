@@ -1,5 +1,6 @@
 class ImportController < ApplicationController
-  
+  before_action :require_login
+
   def new
     @account = Account.find(params[:account_id])
   end
