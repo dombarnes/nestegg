@@ -1,12 +1,12 @@
   <section>
-    <table>
+    <table class="transactions">
     <thead>
       <tr>
         <th>Date</th>
         <th>Description</th>
-        <th>Amount</th>
+        <th class="currency">Amount</th>
         <th>Category</th>
-        <th colspan="2"></th>
+        <th colspan="1"></th>
       </tr>
     </thead>
     <tbody>
@@ -18,10 +18,9 @@
           <tr>
             <td><%= transaction.date %></td>
             <td><%= link_to transaction.description, transaction %></td>
-            <td><%= number_to_currency(transaction.amount) %></td>
-            <td><%= transaction.category_id %></td>
+            <td class="currency"><%= number_to_currency(transaction.amount) %></td>
+            <td><%= transaction.category.name %></td>
             <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-            <td><%= link_to 'Delete', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tr>

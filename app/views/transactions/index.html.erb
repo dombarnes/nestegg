@@ -13,10 +13,10 @@
       <tr>
         <th>Date</th>
         <th>Description</th>
-        <th>Amount</th>
+        <th width="40">Amount</th>
         <th>Category</th>
         <th>Account</th>
-        <th colspan="2"></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -28,12 +28,14 @@
         <% @transactions.each do |transaction| %>
           <tr>
             <td><%= transaction.date %></td>
-            <td><%= link_to transaction.description, transaction %></td>
+            <td>
+              <%= link_to transaction.description, transaction %>
+              <p class="notes"><%= transaction.notes %></p>
+            </td>
             <td class="number"><%= number_to_currency(transaction.amount, unit: "£") %></td>
-            <td><%= transaction.category_id %></td>
+            <td><%= transaction.category.name unless !transaction.category_id.present? %></td>
             <td><%= transaction.account.name %></td>
             <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-            <td><%= link_to 'Delete', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tr>

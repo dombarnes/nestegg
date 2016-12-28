@@ -38,7 +38,7 @@ class TransactionsController < ApplicationController
 
   def destroy
     @transaction.destroy
-    redirect_to account_url, notice: 'Transaction was successfully deleted.'
+    redirect_to account_path(@transaction.account_id), notice: 'Transaction was successfully deleted.'
   end
 
   private
@@ -52,6 +52,6 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:description, :amount, :date, :category_id, :account_id)
+    params.require(:transaction).permit(:description, :amount, :date, :category_id, :account_id, :notes)
   end
 end

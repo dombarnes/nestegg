@@ -5,6 +5,7 @@
     <%= f.input :name %>
     <%= f.input :organisation %>
     <%= f.input :opening_balance %>
+    <%= f.input :account_type, collection: Account::ACCOUNT_TYPE %>
     <%= f.input :overdraft %>
     <%= f.input :credit_interest %>
     <%= f.input :debit_interest %>

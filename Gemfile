@@ -1,12 +1,12 @@
 source "https://rubygems.org"
-ruby "2.3.1"
+ruby "2.3.3"
 
 gem "rails", "~> 4.2.0"
 gem "pg"
 gem "puma", "~> 3.0"
 
 gem "autoprefixer-rails"
-gem "bourbon"
+gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.1.0'
 # gem "delayed_job_active_record"
 gem "email_validator"
@@ -15,17 +15,15 @@ gem "high_voltage"
 gem "rails-i18n"
 gem "i18n-tasks"
 gem "jquery-rails"
-gem "neat"
-gem "newrelic_rpm", ">= 3.9.8"
 gem "normalize-rails", "~> 3.0.0"
 gem "rack-canonical-host"
 gem "resque"
 gem "resque-scheduler"
-gem "recipient_interceptor"
 gem "refills"
 gem "sass-rails", "~> 5.0"
 gem "simple_form"
 gem "title"
+gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 gem 'uglifier', '>= 1.3.0'
 
 gem "will_paginate"
@@ -34,6 +32,10 @@ gem "bootstrap-will_paginate"
 # For importing
 gem "smarter_csv", '~> 1.1.0'
 
+group :production do
+  gem "newrelic_rpm", ">= 3.9.8"
+end
+
 group :development do
   gem "bullet"
   gem "capistrano", "~> 3.4"
@@ -41,6 +43,7 @@ group :development do
   gem "capistrano-bundler"
   gem 'capistrano-rbenv', '~> 2.0'
   gem "letter_opener"
+  gem "recipient_interceptor"
   gem "spring"
   gem "spring-commands-rspec"
   gem "web-console"

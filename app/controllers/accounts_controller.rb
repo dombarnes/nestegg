@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @transactions = @account.transactions.paginate(page: params[:page])
+    @transactions = @account.transactions.joins(:category).paginate(page: params[:page])
   end
 
   def new
@@ -52,6 +52,6 @@ class AccountsController < ApplicationController
   end
 
   def account_params
-    params.require(:account).permit(:name, :opening_balance, :balance, :overdraft, :organisation, :credit_interest, :debit_interest)
+    params.require(:account).permit(:name, :account_type, :opening_balance, :balance, :overdraft, :organisation, :credit_interest, :debit_interest)
   end
 end
