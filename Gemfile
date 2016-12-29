@@ -32,6 +32,10 @@ gem "bootstrap-will_paginate"
 # For importing
 gem "smarter_csv", '~> 1.1.0'
 
+group :development, :staging do
+  gem "recipient_interceptor"
+end
+
 group :production do
   gem "newrelic_rpm", ">= 3.9.8"
 end
@@ -43,7 +47,6 @@ group :development do
   gem "capistrano-bundler"
   gem 'capistrano-rbenv', '~> 2.0'
   gem "letter_opener"
-  gem "recipient_interceptor"
   gem "spring"
   gem "spring-commands-rspec"
   gem "web-console"
