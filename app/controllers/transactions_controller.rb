@@ -5,7 +5,11 @@ class TransactionsController < ApplicationController
   after_action :update_account_balance, only: [:new, :update, :destroy]
 
   def index
-    @transactions = Transaction.send(params[:timeframe] || 'all').joins(:account).paginate(page: params[:page])
+    @transactions = Transaction.where(nil)
+    filtering_params(params).each do |key, value|
+      @transactions = @transactions.public_send(key, value) if value.present?
+    end
+    @transactions = @transactions.joins(:account).joins(:category).paginate(page: params[:page])
   end
 
   def search
@@ -66,4 +70,7 @@ class TransactionsController < ApplicationController
     @account.balance = @account.account_total
   end
 
+  def filtering_params(params)
+    params.slice(:age)
+  end
 end

@@ -27,12 +27,14 @@
     <th>Date</th>
     <th>Description</th>
     <th>Amount</th>
+    <th>Account</th>
   </tr>
   <% @transactions.each do |transaction| %>
   <tr>
     <td><%= transaction.date %></td>
     <td><%= link_to transaction.description, transaction_path(transaction) %></td>
     <td><%= number_to_currency(transaction.amount) %></td>
+    <td><%= transaction.account_id %></td>
   </tr>
   <% end %>
 </table>

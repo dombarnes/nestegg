@@ -2,13 +2,13 @@
   <h1>Searching "<%= params[:search] %>"</h1>
 <p>Filters</p>
 
-<%= link_to "Last 30 days", transactions_path(timeframe: :last_30_days) %>
-<%= link_to "Last Month", transactions_path(timeframe: :last_month) %>
-<%= link_to "Last Quarter", transactions_path(timeframe: :last_quarter) %>  
+<%= link_to "Last 30 days", search_transactions_path(age: 30.to_i) %>
+<%= link_to "Last Quarter", search_transactions_path(age: 91.to_i) %>  
+<%= link_to "Last 6 months", search_transactions_path(age: (6.months/1.day)) %>  
 <table class="table table-striped sortable">
   <thead>
     <tr>
-      <th data-defaultsort="desc" data-dateformat="dd mm yyyy">Date</th>
+      <th data-defaultsort="desc" data-dateformat="DD MMM YYYY">Date</th>
       <th>Description</th>
       <th width="40">Amount</th>
       <th>Category</th>
@@ -28,7 +28,7 @@
             <%= link_to transaction.description, transaction %>
           </td>
           <td class="number"><%= number_to_currency(transaction.amount, unit: "£") %></td>
-          <td><%= transaction.category.name unless !transaction.category_id.present? %></td>
+          <td><%= link_to transaction.category.name, category_path(transaction.category) unless !transaction.category_id.present? %></td>
           <td><%= transaction.account.name %></td>
           <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
         </tr>

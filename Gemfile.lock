@@ -392,7 +392,7 @@ DEPENDENCIES
   rack-mini-profiler
   rack-timeout
   rails (~> 4.2)
-  rails-i18n
+  rails-i18n (~> 4.0.0)
   rails_bootstrap_sortable (~> 2.0, >= 2.0.1)
   rails_stdout_logging
   recipient_interceptor

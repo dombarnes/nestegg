@@ -1,4 +1,4 @@
-<table class="table transactions">
+<table class="table sortable transactions">
   <thead>
     <tr>
       <th>Date</th>
@@ -15,8 +15,11 @@
     <% else %>
       <% @transactions.each do |transaction| %>
         <tr>
-          <td><%= transaction.date %></td>
-          <td><%= link_to transaction.description, transaction %></td>
+          <td data-dateformat="DD MMM YYYY"><%= transaction.date %></td>
+          <td>
+            <%= link_to transaction.description, transaction %>
+            <small><%= "(" + transaction.account.name  + ")" unless @account %></small>
+          </td>
           <td class="currency"><%= number_to_currency(transaction.amount) %></td>
           <td><%= transaction.category.name if transaction.category %></td>
           <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>

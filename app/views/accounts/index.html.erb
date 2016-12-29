@@ -15,13 +15,13 @@
     <% @accounts.each do |account| %>
       <tr class="table-row" data-link="<%= account_path(account) %>">
         <td class="table-cell"><%= account.name %> - <small><%= account.organisation %></small></td>
-        <td class="table-cell currency"><%= number_to_currency_gb(account.account_total) %></td>
+        <td class="table-cell currency"><%= number_to_currency(account.account_total) %></td>
       </tr>
     <% end %>
     <tfoot>
       <tr>
         <td>Net Worth</td>
-        <td class="number"><%= number_to_currency_gb(@net_worth) %></td>
+        <td class="number"><%= number_to_currency(@net_worth) %></td>
       </tr>
     </tfoot>
   </tbody>

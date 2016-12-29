@@ -8,6 +8,7 @@ class Account < ActiveRecord::Base
   validates_presence_of :name, :balance, :opening_balance
   validates :name, uniqueness: true
   default_scope -> { order('name ASC') }
+  scope :active, -> { where(status: 'active') }
 
   def account_total
     opening_balance + transactions.sum(:amount)
