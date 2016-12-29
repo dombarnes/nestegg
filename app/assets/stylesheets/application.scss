@@ -1,5 +1,6 @@
 /*
- *= require_self
+  *= require bootstrap-sortable
+  *= require_self
 */
 
 @charset "utf-8";
@@ -7,6 +8,7 @@
 @import "normalize-rails";
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "utilities";
 @import "accounts";
 @import "transactions";
 @import "categories";
@@ -15,8 +17,7 @@ body {
   padding-top: 50px;
 }
 
-header {
-}
+header { }
 
 .main {
   padding: 20px;
@@ -48,5 +49,3 @@ header {
 }
 footer {
 }
-
-

@@ -14,12 +14,15 @@ class Transaction < ActiveRecord::Base
   scope :last_quarter, -> { where date: (Time.now - 3.months).beginning_of_month..Time.now.end_of_month }
 
   FILTER = {
-    "All" => "all",
-    "Last 30 days" => "last_30_days",
-    "Last Month" => "last_month",
-    "Last quarter" => "last_quarter"
+    'All' => 'all',
+    'Last 30 days' => 'last_30_days',
+    'Last Month' => 'last_month',
+    'Last quarter' => 'last_quarter'
   }
 
   attr_accessor :file
 
+  def self.search(search)
+    where("lower(description) LIKE lower(?)", "%#{search}%")
+  end
 end

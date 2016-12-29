@@ -1,5 +1,7 @@
 //= require jquery
 //= require jquery_ujs
+//= require moment
+//= require bootstrap-sortable
 //= require_tree .
 
 $(function() {

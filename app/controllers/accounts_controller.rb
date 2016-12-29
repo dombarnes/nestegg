@@ -1,9 +1,10 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-
+  
   def index
     @accounts = Account.all
     @net_worth = Account.sum(:balance)
+    @transactions = Transaction.limit(10)
   end
 
   def show

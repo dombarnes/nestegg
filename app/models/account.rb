@@ -10,7 +10,7 @@ class Account < ActiveRecord::Base
   default_scope -> { order('name ASC') }
 
   def account_total
-    self.opening_balance + self.transactions.sum(:amount)
+    opening_balance + transactions.sum(:amount)
   end
 
 end

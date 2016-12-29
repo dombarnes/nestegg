@@ -1,32 +1,28 @@
-  <section>
-    <table class="transactions">
-    <thead>
+<table class="table transactions">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th class="currency">Amount</th>
+      <th>Category</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @transactions.blank? %>
       <tr>
-        <th>Date</th>
-        <th>Description</th>
-        <th class="currency">Amount</th>
-        <th>Category</th>
-        <th colspan="1"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if @transactions.blank? %>
+        <td colspan="7">There are no transactions to show.</td>
+    <% else %>
+      <% @transactions.each do |transaction| %>
         <tr>
-          <td colspan="7">There are no transactions to show.</td>
-      <% else %>
-        <% @transactions.each do |transaction| %>
-          <tr>
-            <td><%= transaction.date %></td>
-            <td><%= link_to transaction.description, transaction %></td>
-            <td class="currency"><%= number_to_currency(transaction.amount) %></td>
-            <td><%= transaction.category.name %></td>
-            <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-          </tr>
-        <% end %>
-      </tr>
+          <td><%= transaction.date %></td>
+          <td><%= link_to transaction.description, transaction %></td>
+          <td class="currency"><%= number_to_currency(transaction.amount) %></td>
+          <td><%= transaction.category.name if transaction.category %></td>
+          <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+        </tr>
       <% end %>
-    </tbody>
-  </table>
-  <%= will_paginate @transactions %>
-  </section>
-</section>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

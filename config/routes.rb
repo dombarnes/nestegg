@@ -8,7 +8,9 @@ Rails.application.routes.draw do
       collection {post :create }
     end
   end
-  resources :transactions
+  resources :transactions do
+    collection {get :search }
+  end
   resources :categories
 
   root 'accounts#index'

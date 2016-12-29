@@ -16,7 +16,7 @@
   </tr>
   <% @transaction_months.each do |month, transactions| %>
   <tr>
-    <td><%= month.strftime("%B") %></td>
+    <td><%= month.strftime("%B %Y") %></td>
     <td><%= number_to_currency(transactions.inject(0) {|sum, hash| sum + hash[:amount]}) %></td>
   </tr>
   <% end %>
