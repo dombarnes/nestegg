@@ -2,6 +2,8 @@
 *.DS_Store
 *.swo
 *.swp
+dump.rdb
+
 /.bundle
 /.env
 /.foreman
@@ -12,3 +14,5 @@
 /public/assets
 /tags
 /tmp/*
+rubocop_results.txt
+config/deploy*

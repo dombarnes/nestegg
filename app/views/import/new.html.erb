@@ -1,0 +1,12 @@
+<section>
+  <h2>Import from CSV</h2>
+  <p>Import transactions from your bank's download facilities.</p>
+  <%= form_tag account_import_index_path(@account), multipart: true do %> 
+    <%= check_box_tag headers %><%= label_tag "This file has header rows" %>
+    <%= hidden_field "account_id", value: :account_id %>
+    
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import" %>
+  <% end %>
+</section>
+<%= debug params %>

@@ -5,3 +5,15 @@
 	background-color: #f6f7f7;
 	transition: all 0.25s cubic-bezier(0.215, 0.61, 0.355, 1)
 }
+table {
+  width:100%;
+  tr th {
+    padding: 0 8px 0 0;
+  }
+  tr td {
+   padding: 0 8px 0 0; 
+  }
+}
+th.currency, td.currency {
+  text-align: right;
+}

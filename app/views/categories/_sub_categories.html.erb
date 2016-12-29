@@ -1,0 +1,17 @@
+<p>Sub-categories: </p>
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+      <th class="currency">Amount</th>
+    </tr>
+  <% @category.children.each do |cat| %>
+  <tr>
+    <td><%= link_to cat.name, category_path(cat) %></dt>
+    <td class="currency"><%= number_to_currency(cat.transactions.sum(:amount)) %></dd>
+  </td>
+<% end %>
+<tfoot>
+  <tr>
+    <td>Total</td>
+    <td class="currency"><%= number_to_currency(@category.children.includes(:transactions).sum(:amount)) %></td>
+</table>

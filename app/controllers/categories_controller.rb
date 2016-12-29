@@ -8,6 +8,9 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   def show
+    @transactions = @category.transactions
+    @transaction_months = @transactions.group_by { |t| t.date.beginning_of_month }
+    # @months = @transactions.select("date_trunc('month', date) as month, sum(amount) as total_amount").group('month')
   end
 
   # GET /categories/new
@@ -46,13 +49,14 @@ class CategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def category_params
-      params.require(:category).permit(:name, :parent_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = Category.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def category_params
+    params.require(:category).permit(:name, :parent_id)
+  end
 end

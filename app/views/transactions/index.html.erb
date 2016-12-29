@@ -1,48 +1,50 @@
-<p id="notice"><%= notice %></p>
-<h1><%= @account.name.capitalize %> Transactions</h1>
+<section>
+  <h1>All Transactions</h1>
+  <h2>Balance: </h2>
+  <p><%= link_to 'New Transaction', new_transaction_path %></p>
+<p>Filters</p>
 
-<%= link_to 'Back to accounts', accounts_path %>
-<h2>Balance</h2>£<%= @account.balance %>
-<p><%= link_to 'New Transaction', new_account_transaction_path %>
-<table>
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Description</th>
-      <th>Amount</th>
-      <th>Category</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% if @transactions.blank? %>
+<%= link_to "Last 30 days", transactions_path(timeframe: :last_30_days) %>
+<%= link_to "Last Month", transactions_path(timeframe: :last_month) %>
+<%= link_to "Last Quarter", transactions_path(timeframe: :last_quarter) %>
+  <section>
+    <table>
+    <thead>
       <tr>
-        <td colspan="7">There are no transactions to show.</td>
-    <% else %>
-      <% @transactions.each do |transaction| %>
+        <th>Date</th>
+        <th>Description</th>
+        <th width="40">Amount</th>
+        <th>Category</th>
+        <th>Account</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% if @transactions.blank? %>
         <tr>
-          <td><%= transaction.date %></td>
-          <td><%= transaction.description %></td>
-          <td><%= transaction.amount %></td>
-          <td><%= transaction.category_id %></td>
-          <td><%= link_to 'Show', [@account, transaction] %></td>
-          <td><%= link_to 'Edit', edit_account_transaction_path(@account, transaction) %></td>
-          <td><%= link_to 'Delete', [@account, transaction], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+          <td colspan="7">There are no transactions to show.</td>
+      <% else %>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= transaction.date %></td>
+            <td>
+              <%= link_to transaction.description, transaction %>
+              <p class="notes"><%= transaction.notes %></p>
+            </td>
+            <td class="number"><%= number_to_currency(transaction.amount, unit: "£") %></td>
+            <td><%= transaction.category.name unless !transaction.category_id.present? %></td>
+            <td><%= transaction.account.name %></td>
+            <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+          </tr>
+        <% end %>
+      </tr>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
-
-
-<h2>Import from CSV</h2>
-<p>Import transactions from your bank's download facilities.
-<%= form_tag import_account_transactions_path, multipart: true do %> 
-  <%= check_box_tag headers %><%= label_tag "This file has header rows" %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
-<% end %>
+    </tbody>
+  </table>
+  </section>
+</section>
+<%= will_paginate @transactions %>
 
 <section id="debug">
 </section>

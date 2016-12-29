@@ -4,6 +4,10 @@
   <strong>Description:</strong>
   <%= @transaction.description %>
 </p>
+<p>
+  <strong>Notes:</strong>
+  <%= @transaction.notes %>
+</p>
 
 <p>
   <strong>Amount:</strong>
@@ -17,8 +21,8 @@
 
 <p>
   <strong>Category:</strong>
-  <%= @transaction.category_id %>
+  <%= @transaction.category.name %>
 </p>
 
 <%= link_to 'Edit', edit_account_transaction_path(@account, @transaction) %> |
-<%= link_to 'Back', account_transactions_path %>
+<%= link_to 'Back to Account', account_path(@account) %>

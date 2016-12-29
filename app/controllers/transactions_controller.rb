@@ -1,17 +1,16 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-  before_action :set_account
 
   def index
-    @transactions = @account.transactions
-    # .paginate(page: params[:page])
+    @transactions = Transaction.send(params[:timeframe] || 'all').joins(:account).paginate(page: params[:page])
   end
 
   def show
+    @account = @transaction.account    
   end
 
   def new
-    @transaction = @account.transactions.new
+    @transaction = Transaction.new
   end
 
   def edit
@@ -19,11 +18,10 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = @account.transactions.new(transaction_params)
-    @account.balance += @transaction.amount
-    @transacaction.balance = @acount.balance
-      
+    @transaction.balance += @transaction.amount
     if @transaction.save
       @account.save!
+      @account.balance = @transaction.balance
       redirect_to account_transactions_path(@account), notice: 'Transaction saved!'
     else
       render :new
@@ -40,27 +38,20 @@ class TransactionsController < ApplicationController
 
   def destroy
     @transaction.destroy
-    redirect_to account_transactions_url, notice: 'Transaction was successfully destroyed.'
+    redirect_to account_path(@transaction.account_id), notice: 'Transaction was successfully deleted.'
   end
-
-  def import
-    @account.transactions.import(params[:file], :headers)
-    redirect_to account_transactions_url, notice: 'Transactions imported.'
-  end
-
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
-    def set_account
-      @account = Account.find(params[:account_id])
-    end
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def transaction_params
-      params.require(:transaction).permit(:description, :amount, :date, :category_id, :account_id)
-    end
+  def set_account
+    @account = Account.find(params[:account_id])
+  end
+
+  def transaction_params
+    params.require(:transaction).permit(:description, :amount, :date, :category_id, :account_id, :notes)
+  end
 end

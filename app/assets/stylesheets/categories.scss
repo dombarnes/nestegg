@@ -1,0 +1,7 @@
+table.categories {
+  width: 100%;
+  
+  th:nth-child(1), td:nth-child(1) {
+    max-width:10%;
+  }
+}

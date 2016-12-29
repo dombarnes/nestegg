@@ -1,25 +1,52 @@
+/*
+ *= require_self
+*/
+
 @charset "utf-8";
 
 @import "normalize-rails";
-@import "bourbon";
-@import "base/grid-settings";
-@import "neat";
-@import "base/base";
-@import "refills/flashes";
+@import "bootstrap-sprockets";
+@import "bootstrap";
 @import "accounts";
+@import "transactions";
+@import "categories";
+
+body {
+  padding-top: 50px;
+}
 
 header {
-
 }
 
-main {
-	margin: 0 20px;
+.main {
+  padding: 20px;
 }
-
-section {
-	@include outer-container;
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
 }
-
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
 footer {
-	@include outer-container(100%);
 }
+
+

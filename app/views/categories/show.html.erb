@@ -1,14 +1,38 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
-
-<p>
-  <strong>Parent:</strong>
-  <%= @category.parent_id %>
-</p>
-
+<h1><%= @category.name %> <small><%= link_to @category.parent_name, category_path(@category.parent_id) unless !@category.parent_id %></small></h1>
 <%= link_to 'Edit', edit_category_path(@category) %> |
 <%= link_to 'Back', categories_path %>
+
+<h2>
+  <strong>Total:</strong>
+  <%= number_to_currency(@category.total_with_sub_categories) %>
+</h2>
+<% if @category.children.exists? %>
+  <%= render 'sub_categories' %>
+<% end %>
+<table class="table">
+  <tr>
+    <th>Month</th>
+    <th>Amount</th>
+  </tr>
+  <% @transaction_months.each do |month, transactions| %>
+  <tr>
+    <td><%= month.strftime("%B") %></td>
+    <td><%= number_to_currency(transactions.inject(0) {|sum, hash| sum + hash[:amount]}) %></td>
+  </tr>
+  <% end %>
+</table>
+
+<table class="table table-striped">
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+  </tr>
+  <% @transactions.each do |transaction| %>
+  <tr>
+    <td><%= transaction.date %></td>
+    <td><%= link_to transaction.description, transaction_path(transaction) %></td>
+    <td><%= number_to_currency(transaction.amount) %></td>
+  </tr>
+  <% end %>
+</table>

@@ -1,12 +1,13 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  
-    def index
+
+  def index
     @accounts = Account.all
     @net_worth = Account.sum(:balance)
   end
 
   def show
+    @transactions = @account.transactions.joins(:category).paginate(page: params[:page])
   end
 
   def new
@@ -14,20 +15,23 @@ class AccountsController < ApplicationController
   end
 
   def edit
-      @account_name = @account.name
+    @account_name = @account.name
   end
 
   def create
     @account = Account.new(account_params)
-    @account.balance = @account.opening_balance
+    @account.balance = @account.opening_balance # replace this with a balance calculation after save
     if @account.save
-      AccountMailer.new_account(@account).deliver_later
-      redirect_to @account, notice: 'Your new account was created. You can now add or import your transactions.'
+      # Create the opening balance transaction
+      @account.transactions.create(amount: @account.opening_balance, date: Time.now, description: 'Opening Balance')
+      # calculcate_balance
+      AccountMailer.new_account(@account).deliver_now
+      redirect_to account_transactions_path(@account), notice: 'Your new account was created. You can now add or import your transactions.'
     else
       render :new
     end
   end
-
+  
   def update
     if @account.update(account_params)
       redirect_to @account, notice: 'Account was successfully updated.'
@@ -37,19 +41,17 @@ class AccountsController < ApplicationController
   end
 
   def destroy
-    DeleteAccountJob.perform_later @account
+    DeleteAccountJob.perform_now @account
     redirect_to accounts_url, notice: 'Account was deleted.'
-
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_account
-      @account = Account.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def account_params
-      params.require(:account).permit(:name, :opening_balance, :balance, :overdraft, :organisation, :credit_interest, :debit_interest)
-    end
+  def set_account
+    @account = Account.find(params[:id])
+  end
+
+  def account_params
+    params.require(:account).permit(:name, :account_type, :opening_balance, :balance, :overdraft, :organisation, :credit_interest, :debit_interest)
+  end
 end
