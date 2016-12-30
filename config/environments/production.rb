@@ -14,6 +14,7 @@ Rails.application.configure do
   config.assets.js_compressor = :uglifier
   config.assets.compile = false
   config.assets.digest = true
+  config.assets.precompile += %w( analytics.js )
   config.log_level = :debug
   config.action_controller.asset_host = ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))
   config.action_mailer.delivery_method = :smtp

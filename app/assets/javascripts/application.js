@@ -2,9 +2,8 @@
 //= require jquery_ujs
 //= require moment
 //= require bootstrap-sortable
-//= require_tree .
 
-$(function() {
+$(document).ready(function() {
   $('.datepicker').datepicker();
 });
 $(document).ready(function() {

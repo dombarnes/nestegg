@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     collection {get :search }
   end
   resources :categories
-
+  resources :analytics
+  
   root 'accounts#index'
 end
