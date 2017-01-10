@@ -1,18 +1,17 @@
 Rails.application.routes.draw do
   resources :accounts do  
-  	resources :transactions do
-  		# collection { post :import }
-      # collection { get :import }
-  	end
+  	resources :transactions
     resources :import, only: [:new] do 
       collection {post :create }
     end
   end
-  resources :transactions do
-    collection {get :search }
+  resources :transactions, only: :index do 
+    collection do 
+      get :search
+    end
   end
   resources :categories
-  resources :analytics
+  resources :analytics, only: [:index]
   
   root 'accounts#index'
 end

@@ -1,8 +1,8 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-  before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_account, only: [:show, :edit]
 
-  after_action :update_account_balance, only: [:new, :update, :destroy]
+  after_action :update_account_balance, only: [:create, :update, :destroy]
 
   def index
     @transactions = Transaction.where(nil)
@@ -21,19 +21,18 @@ class TransactionsController < ApplicationController
   end
 
   def new
-    @transaction = Transaction.new
+    @account = Account.find(params[:account_id])
+    @transaction = @account.transactions.new
   end
 
   def edit
   end
 
   def create
-    @transaction = @account.transactions.new(transaction_params)
-    @transaction.balance += @transaction.amount
+    @transaction = Transaction.new(transaction_params)
     if @transaction.save
-      @account.save!
-      @account.balance = @transaction.balance
-      redirect_to account_transactions_path(@account), notice: 'Transaction saved!'
+      # @account.balance = @transaction.balance
+      redirect_to account_path(@transaction.account), notice: 'Transaction saved!'
     else
       render :new
     end
@@ -41,7 +40,7 @@ class TransactionsController < ApplicationController
 
   def update
     if @transaction.update(transaction_params)
-      redirect_to account_transactions_path(@transaction), notice: 'Transaction updated!'
+      redirect_to account_path(@transaction.account), notice: 'Transaction updated!'
     else
       render :edit
     end
@@ -59,14 +58,22 @@ class TransactionsController < ApplicationController
   end
 
   def set_account
-    @account = Account.find(@transaction.account_id)
+    @account = Account.find(params[:account_id])
   end
 
   def transaction_params
-    params.require(:transaction).permit(:description, :amount, :date, :category_id, :account_id, :notes)
+    params.require(:transaction).permit(
+      :description, 
+      :amount, 
+      :date, 
+      :category_id, 
+      :account_id, 
+      :notes
+    )
   end
 
   def update_account_balance
+    @account = @transaction.account
     @account.balance = @account.account_total
   end
 

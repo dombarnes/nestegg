@@ -14,14 +14,14 @@
   <tbody>
     <% @accounts.each do |account| %>
       <tr class="table-row" data-link="<%= account_path(account) %>">
-        <td class="table-cell"><%= account.name %> - <small><%= account.organisation %></small></td>
-        <td class="table-cell currency"><%= number_to_currency(account.account_total) %></td>
+        <td class="table-cell"><%= link_to account.name, account_path(account) %> - <small><%= account.organisation %></small></td>
+        <td class="table-cell currency"><%= number_to_currency(account.account_total) %><small><%= number_to_currency(account.overdraft) %></small></td>
       </tr>
     <% end %>
     <tfoot>
       <tr>
         <td>Net Worth</td>
-        <td class="number"><%= number_to_currency(@net_worth) %></td>
+        <td class="number"><%= number_to_currency(@net_worth) %><small>(<%= @accounts.sum(:overdraft) %>)</small></td>
       </tr>
     </tfoot>
   </tbody>

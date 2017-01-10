@@ -4,6 +4,8 @@ class CategoriesController < ApplicationController
   # GET /categories
   def index
     @categories = Category.all
+    # @categories = Category.joins(:transactions).merge(Transaction.unscoped.where("transactions.date > ?", Time.now - 1.year)).group("name")
+    # @categories = Transaction.unscoped.last_year.joins(:category).select("categories.name").group(:category)
   end
 
   # GET /categories/1

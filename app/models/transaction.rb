@@ -14,7 +14,8 @@ class Transaction < ActiveRecord::Base
   scope :last_3_months, -> { where date: 3.months.ago..Time.now }
   scope :last_month, -> { where date: Time.now.last_month.beginning_of_month..Time.now.last_month.end_of_month }
   scope :last_quarter, -> { where date: (Time.now - 3.months).beginning_of_month..Time.now.end_of_month }
-
+  scope :last_year, -> { where date: (Time.now - 1.year).beginning_of_month..Time.now.end_of_month } 
+  
   FILTER = {
     'All' => 'all',
     'Last 30 days' => 'last_30_days',

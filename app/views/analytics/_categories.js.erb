@@ -1,26 +1,25 @@
 var ctx = document.getElementById("monthlyCategories");
 var data = {
-  labels: <%=raw @transactions.map {|l| Category.find(l[:category_id]).name } %>,
+  labels: <%=raw @categories.map {|k,v|  k.name} %>,
   datasets: [
     {
-      label: "My First dataset",
-      backgroundColor: [],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
+      label: "Total Spending",
+      backgroundColor: [
+      <% Category.all.each do %>
+        <%=raw "\"#" + random_color + "\"," %>
+      <% end %>
       ],
-      borderWidth: 1,
-      data: <%= @transactions.map { |n| n[:total].to_f } %>,
+      borderWidth: 0,
+      data: <%= @categories.map { |k, v| k.total.to_f } %>
     }
   ]
 };
 var options = {
   responsive: false,
   maintainAspectRatio: false,
+  legend: {
+    display: false
+  },
   scales: {
     xAxes: [{
       stacked: false,
@@ -34,6 +33,10 @@ var options = {
       }
     }],
     yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: "Amount Spent (£)"
+      }
       // ticks: {
       //   min: 0,
       //   stepSize: 10

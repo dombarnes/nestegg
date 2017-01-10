@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <% if @transactions.blank? %>
+    <% if @transactions.empty? %>
       <tr>
         <td colspan="7">There are no transactions to show.</td>
     <% else %>
@@ -17,12 +17,12 @@
         <tr>
           <td data-dateformat="DD MMM YYYY"><%= transaction.date %></td>
           <td>
-            <%= link_to transaction.description, transaction %>
+            <%= link_to transaction.description, account_transaction_path(transaction.account, transaction) %>
             <small><%= "(" + transaction.account.name  + ")" unless @account %></small>
           </td>
           <td class="currency"><%= number_to_currency(transaction.amount) %></td>
           <td><%= transaction.category.name if transaction.category %></td>
-          <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+          <td><%= link_to 'Edit', edit_account_transaction_path(transaction.account, transaction) %></td>
         </tr>
       <% end %>
     </tr>

@@ -1,5 +1,6 @@
 <%= javascript_include_tag "analytics.js" %>
 <h1>Analytics</h1>
+<h2>Last 12 month of Spending</h2>
 <canvas id="monthlyCategories" width="1000" height="600" /></canvas>
 <%= javascript_tag render 'analytics/categories.js' %>
-<%= debug @transactions %>
+<%= debug @categories %>

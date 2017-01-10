@@ -32,9 +32,9 @@
   <% @transactions.each do |transaction| %>
   <tr>
     <td><%= transaction.date %></td>
-    <td><%= link_to transaction.description, transaction_path(transaction) %></td>
+    <td><%= link_to transaction.description, account_transaction_path(transaction.account, transaction) %></td>
     <td><%= number_to_currency(transaction.amount) %></td>
-    <td><%= transaction.account_id %></td>
+    <td><%= transaction.account.name %></td>
   </tr>
   <% end %>
 </table>

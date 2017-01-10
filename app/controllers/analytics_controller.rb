@@ -2,8 +2,7 @@ class AnalyticsController < ApplicationController
   include AnalyticsHelper
 
   def index
-    # @transactions = Transaction.unscoped.joins(:category).select("category_id, sum(amount) AS 'total'").where.not(category_id: nil).group('categories.name').order('total desc')
-    @transactions = Transaction.unscoped.joins(:category).where.not(category_id: nil).group([:categories, :name]).sum(:amount)#.order('sum_amount desc')
+    @categories = Category.unscoped.joins(:transactions).select("categories.name, sum(transactions.amount) as total").where("transactions.date > ?", Time.now - 1.year).group("categories.name").order("total ASC")
     respond_to do |format|
       format.html
       format.js
