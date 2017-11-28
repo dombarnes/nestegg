@@ -21,7 +21,7 @@
             <small><%= "(" + transaction.account.name  + ")" unless @account %></small>
           </td>
           <td class="currency"><%= number_to_currency(transaction.amount) %></td>
-          <td><%= transaction.category.name if transaction.category %></td>
+          <td><%= link_to transaction.category, account_category_path(transaction.account, transaction) %></td>
           <td><%= link_to 'Edit', edit_account_transaction_path(transaction.account, transaction) %></td>
         </tr>
       <% end %>

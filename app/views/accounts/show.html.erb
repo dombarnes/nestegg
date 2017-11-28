@@ -1,6 +1,7 @@
 <section>
-  <h1><%= @account.name.capitalize %> Transactions</h1> <%= @account.organisation %>
-  <p><%= link_to 'Edit', edit_account_path(@account) %> | <%= link_to 'Back to accounts', accounts_path %>
+  <%= link_to 'Back to accounts', accounts_path %>
+  <h1><%= @account.name.titleize %> Transactions <small><%= @account.organisation %></small><%= link_to 'Edit', edit_account_path(@account), class: "btn" %></h1>
+  <p>
   <h2>Balance <%= number_to_currency(@account.balance) %></h2>
   <h2>Total <%= number_to_currency(@account.account_total) %></h2>
   <%= link_to 'New Transaction', new_account_transaction_path(@account), class: 'btn btn-info' %>
