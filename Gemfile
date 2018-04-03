@@ -26,7 +26,7 @@ gem 'resque-scheduler'
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
 gem 'title'
-gem 'twitter-bootstrap-rails', git: 'https://github.com/seyhunak/twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails'
 gem 'uglifier', '>= 1.3.0'
 
 gem 'bootstrap-will_paginate'
