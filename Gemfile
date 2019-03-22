@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.4.1'
 
-gem 'pg'
+gem 'pg', '~> 0.15'
 gem 'puma', '~> 3.0'
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 4.2.11'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
