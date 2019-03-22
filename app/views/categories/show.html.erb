@@ -9,30 +9,33 @@
 <% if @category.children.exists? %>
   <%= render 'sub_categories' %>
 <% end %>
+
 <table class="table">
   <tr>
     <th>Month</th>
-    <th>Amount</th>
+    <th class="currency">Amount</th>
   </tr>
   <% @transaction_months.each do |month, transactions| %>
   <tr>
-    <td><%= month.strftime("%B") %></td>
-    <td><%= number_to_currency(transactions.inject(0) {|sum, hash| sum + hash[:amount]}) %></td>
+    <td><%= month.strftime("%B %Y") %></td>
+    <td class="currency"><%= number_to_currency(transactions.inject(0) {|sum, hash| sum + hash[:amount]}) %></td>
   </tr>
   <% end %>
 </table>
 
-<table class="table table-striped">
+<table class="table table-striped sortable">
   <tr>
     <th>Date</th>
     <th>Description</th>
-    <th>Amount</th>
+    <th class="currency">Amount</th>
+    <th>Account</th>
   </tr>
   <% @transactions.each do |transaction| %>
   <tr>
     <td><%= transaction.date %></td>
-    <td><%= link_to transaction.description, transaction_path(transaction) %></td>
-    <td><%= number_to_currency(transaction.amount) %></td>
+    <td><%= link_to transaction.description, account_transaction_path(transaction.account, transaction) %></td>
+    <td class="currency"><%= number_to_currency(transaction.amount) %></td>
+    <td><%= transaction.account.name %></td>
   </tr>
   <% end %>
 </table>

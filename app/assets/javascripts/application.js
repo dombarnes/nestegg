@@ -1,10 +1,15 @@
 //= require jquery
+//= require jquery-ui/widgets/datepicker
 //= require jquery_ujs
-//= require_tree .
+//= require moment
+//= require bootstrap-sortable
 
 $(function() {
-  $('.datepicker').datepicker();
+  $('.datepicker').datepicker({
+  dateFormat: 'dd M yy'
+  });
 });
+
 $(document).ready(function() {
   var menuToggle = $('#js-centered-navigation-mobile-menu').unbind();
   $('#js-centered-navigation-menu').removeClass("show");

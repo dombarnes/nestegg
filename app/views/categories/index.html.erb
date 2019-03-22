@@ -2,12 +2,11 @@
 
 <h1>Listing Categories</h1>
 
-<table class="categories">
+<table class="table table-striped sortable categories">
   <thead>
     <tr class="table-row-heading">
       <th>Name</th>
       <th class="currency">Total Spending</th>
-      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -15,8 +14,7 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= link_to category.name, category %></td>
-        <td class="currency"><%= number_to_currency(category.transactions.sum(:amount)) %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
+        <td data-value="<%= category.transactions.sum(:amount) %>" class="currency"><%= number_to_currency(category.transactions.sum(:amount)) %></td>
       </tr>
     <% end %>
   </tbody>

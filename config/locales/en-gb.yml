@@ -6,8 +6,9 @@ en-GB:
       edit: 'Edit %{account_name} - Nest Egg'
       new: 'Add Account - Nest Egg'
     transactions:
-      show: '%{account} - Nest Egg'
+      show: 'Transaction Details - Nest Egg'
       new: 'Add Transaction - Nest Egg'
+    analytics: 'Analytics'
   date:
     abbr_day_names:
     - Sun

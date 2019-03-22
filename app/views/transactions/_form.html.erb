@@ -1,12 +1,12 @@
-<%= simple_form_for @transaction do |f| %>
+<%= simple_form_for [@transaction.account, @transaction] do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.hidden_field :account_id, value: '1' %>
     <%= f.input :description %>
-    <%= f.input :amount %>
-    <%= f.text_field 'date', class: :datepicker %>
-    <%= f.collection_select(:category_id, Category.all, :id, :name)%>
+    <%= f.input :amount, as: :decimal %>
+    <%= f.input :date, as: :string, input_html: {class: :datepicker}  %>
+    <%= f.association :category, prompt: "Choose a Company" %>
+    <%= f.association :account %>
   </div>
 
   <div class="form-actions">

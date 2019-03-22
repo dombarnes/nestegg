@@ -1,0 +1,51 @@
+var ctx = document.getElementById("monthlyCategories");
+var data = {
+  labels: <%=raw @categories.map {|k,v|  k.name} %>,
+  datasets: [
+    {
+      label: "Total Spending",
+      backgroundColor: [
+      <% Category.all.each do %>
+        <%=raw "\"#" + random_color + "\"," %>
+      <% end %>
+      ],
+      borderWidth: 0,
+      data: <%= @categories.map { |k, v| k.total.to_f } %>
+    }
+  ]
+};
+var options = {
+  responsive: false,
+  maintainAspectRatio: false,
+  legend: {
+    display: false
+  },
+  scales: {
+    xAxes: [{
+      stacked: false,
+      gridLines: {
+        display: false
+      },
+      ticks: {
+        autoSkip: false,
+        maxRotation: 90,
+        minRotation: 90,
+      }
+    }],
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: "Amount Spent (£)"
+      }
+      // ticks: {
+      //   min: 0,
+      //   stepSize: 10
+      // }
+    }]
+  }
+};
+var monthlyCategories = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+});

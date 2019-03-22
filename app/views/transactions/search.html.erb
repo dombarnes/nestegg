@@ -1,0 +1,47 @@
+<section>
+  <h1>Searching "<%= params[:search] %>"</h1>
+<p>Filters</p>
+
+<%= link_to "Last 30 days", search_transactions_path(age: 30.to_i) %>
+<%= link_to "Last Quarter", search_transactions_path(age: 91.to_i) %>  
+<%= link_to "Last 6 months", search_transactions_path(age: (6.months/1.day)) %>  
+<table class="table table-striped sortable">
+  <thead>
+    <tr>
+      <th data-defaultsort="desc" data-dateformat="DD MMM YYYY">Date</th>
+      <th>Description</th>
+      <th width="40">Amount</th>
+      <th>Category</th>
+      <th>Account</th>
+      <th data-defaultsort="disabled"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @transactions.blank? %>
+      <tr>
+        <td colspan="7">There are no transactions to show.</td>
+    <% else %>
+      <% @transactions.each do |transaction| %>
+        <tr>
+          <td><%= transaction.date %></td>
+          <td class="description">
+            <%= link_to transaction.description, transaction %>
+          </td>
+          <td class="number"><%= number_to_currency(transaction.amount, unit: "£") %></td>
+          <td><%= link_to transaction.category.name, category_path(transaction.category) unless !transaction.category_id.present? %></td>
+          <td><%= transaction.account.name %></td>
+          <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
+        </tr>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2">Total</td>
+      <td class="number"><%= number_to_currency(@transactions.sum(:amount)) %></td>
+      <td colspan="3"></>
+  </tfoot>
+</table>
+</section>
+<%= will_paginate @transactions %>

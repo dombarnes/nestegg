@@ -3,29 +3,31 @@
 <h1>Listing Accounts</h1>
 <p><%= link_to 'Add Account', new_account_path %>
 
-<table>
+<table class="table">
   <thead>
     <tr class="table-row-heading">
       <th>Name</th>
-      <th>Balance</th>
+      <th class="right-text">Credit Limit</th>
+      <th class="right-text">Balance</th>
     </tr>
   </thead>
 
   <tbody>
     <% @accounts.each do |account| %>
       <tr class="table-row" data-link="<%= account_path(account) %>">
-        <td class="table-cell"><%= account.name %> - <small><%= account.organisation %></small></td>
-        <td class="table-cell currency"><%= number_to_currency_gb(account.account_total) %></td>
+        <td class="table-cell"><%= link_to account.name, account_path(account) %> - <small><%= account.organisation %></small></td>
+        <td class="table-cell currency"><small><%= number_to_currency(account.overdraft) %></small></td>
+        <td class="table-cell currency"><%= number_to_currency(account.account_total) %></td>
       </tr>
     <% end %>
     <tfoot>
       <tr>
         <td>Net Worth</td>
-        <td><%= number_to_currency_gb(@net_worth) %></td>
+        <td class="number"><small><%= number_to_currency(@accounts.sum(:overdraft)) %></small></td>
+        <td class="number"><%= number_to_currency(@net_worth) %></td>
       </tr>
     </tfoot>
   </tbody>
 </table>
-
-<br>
-
+<h3>Latest transactions</h3>
+<%= render 'transactions' %>

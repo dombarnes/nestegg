@@ -1,0 +1,11 @@
+td.description {
+  text-overflow: ellipsis;
+}
+td.number {
+    text-align: right;
+    min-width: 100px;
+    
+}
+th.currency, td.currency {
+  text-align: right;
+}
