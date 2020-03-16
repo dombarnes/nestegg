@@ -191,7 +191,7 @@ GEM
       pry (>= 0.10.4)
     psych (3.1.0)
     public_suffix (3.0.3)
-    puma (3.12.1)
+    puma (3.12.4)
     raabro (1.1.6)
     rack (1.6.11)
     rack-canonical-host (0.2.3)
@@ -398,7 +398,7 @@ DEPENDENCIES
   normalize-rails (~> 3.0)
   pg (~> 0.15)
   pry-rails
-  puma (~> 3.0)
+  puma (~> 3.12)
   rack-canonical-host
   rack-mini-profiler
   rack-timeout
