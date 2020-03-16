@@ -193,7 +193,7 @@ GEM
     public_suffix (3.0.3)
     puma (3.12.1)
     raabro (1.1.6)
-    rack (1.6.11)
+    rack (1.6.13)
     rack-canonical-host (0.2.3)
       addressable (> 0, < 3)
       rack (>= 1.0.0, < 3)
