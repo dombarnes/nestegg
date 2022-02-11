@@ -177,6 +177,7 @@ GEM
       net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
     newrelic_rpm (6.2.0.354)
+    nio4r (2.5.8)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
     normalize-rails (3.0.3)
@@ -191,7 +192,8 @@ GEM
       pry (>= 0.10.4)
     psych (3.1.0)
     public_suffix (3.0.3)
-    puma (3.12.1)
+    puma (5.6.2)
+      nio4r (~> 2.0)
     raabro (1.1.6)
     rack (1.6.11)
     rack-canonical-host (0.2.3)
@@ -398,7 +400,7 @@ DEPENDENCIES
   normalize-rails (~> 3.0)
   pg (~> 0.15)
   pry-rails
-  puma (~> 3.0)
+  puma (~> 5.6)
   rack-canonical-host
   rack-mini-profiler
   rack-timeout
